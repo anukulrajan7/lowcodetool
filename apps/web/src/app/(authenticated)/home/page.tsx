@@ -1,19 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Typography, Row, Col, Card, Avatar, List } from 'antd'
-import {
-  UserOutlined,
-  NotificationOutlined,
-  PictureOutlined,
-} from '@ant-design/icons'
-const { Title, Text, Paragraph } = Typography
-import { useAuthentication } from '@web/modules/authentication'
-import dayjs from 'dayjs'
-import { useSnackbar } from 'notistack'
-import { useRouter, useParams } from 'next/navigation'
+import { NotificationOutlined, UserOutlined } from '@ant-design/icons'
 import { Api, Model } from '@web/domain'
 import { PageLayout } from '@web/layouts/Page.layout'
+import { useAuthentication } from '@web/modules/authentication'
+import { Avatar, Card, Col, List, Row, Typography } from 'antd'
+import dayjs from 'dayjs'
+import { useParams, useRouter } from 'next/navigation'
+import { useSnackbar } from 'notistack'
+import { useEffect, useState } from 'react'
+const { Title, Text, Paragraph } = Typography
 
 export default function HomePage() {
   const router = useRouter()
@@ -30,7 +26,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (userId) {
-      Api.User.find(userId, {
+      Api.User.findOne(userId, {
         includes: ['notifications', 'profilePictures', 'coverPhotos'],
       })
         .then(userData => {
@@ -70,7 +66,7 @@ export default function HomePage() {
           <Card
             title="Notifications"
             bordered={false}
-            icon={<NotificationOutlined />}
+            // icon={<NotificationOutlined />}
           >
             <List
               itemLayout="horizontal"
@@ -96,7 +92,7 @@ export default function HomePage() {
           <Card
             title="Profile Pictures"
             bordered={false}
-            icon={<PictureOutlined />}
+            // icon={<PictureOutlined />}
           >
             <List
               grid={{ gutter: 16, column: 1 }}
@@ -113,7 +109,7 @@ export default function HomePage() {
           <Card
             title="Cover Photos"
             bordered={false}
-            icon={<PictureOutlined />}
+            // icon={<PictureOutlined />}
           >
             <List
               grid={{ gutter: 16, column: 1 }}
